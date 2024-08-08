@@ -9,10 +9,11 @@ use \Illuminate\Auth\Middleware\Authenticate;
 
 Route::prefix('auth')->name('auth.')->group(function (){
     Route::post('/login',[AuthController::class, 'login']);
+    Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 
 Route::prefix('user')->name('user.')->group( function(){
-   Route::get('/', [UserController::class, 'index'])->middleware(Authenticate::using('sanctum'));
+   Route::get('/', [UserController::class, 'index'])->middleware('auth:sanctum');
    Route::post('/', [UserController::class, 'store']);
 });
 

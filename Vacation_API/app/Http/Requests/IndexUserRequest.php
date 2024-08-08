@@ -22,17 +22,8 @@ class IndexUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filters.id' => ['nullable','integer'],
             'filters.name' => ['nullable', 'string'],
-            'filters.email' => ['nullable','email']
-        ];
-    }
-
-    public function messages()
-    {
-        return[
-            'filters.id.integer' => "This ID is not a number, please put a number",
-            'filters.email.email' => "This email is not valid, please put another one"
+            'filters.email' => ['nullable', 'email']
         ];
     }
 }
