@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +23,10 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user.name' => ['required','max:30','min:3'],
-            'user.email' => ['required','email','unique:users,email'],
-            'user.phone' => ['nullable', 'string', 'max:15'],
-            'user.password' => ['required','min:8','max:20']
+            'user.name' => ['nullable', 'string','min:3', 'max:30'],
+            'user.email' => ['nullable','email','unique:users,email'],
+            'user.phone' => ['nullable', 'string','max:15'],
+            'user.password' => ['nullable', 'string', 'min:8','max:20']
         ];
     }
 
@@ -34,13 +35,10 @@ class StoreUserRequest extends FormRequest
         return [
             'user.name.min' => 'The name is too short, 3 mininum characters',
             'user.name.max' => 'The name is too long, please abbreviate it',
-            'user.name.required' => 'The name is required, please fill it in',
-            'user.email.required' => 'The email is required, please fill it in',
             'user.email.email' => 'This email is not valid, try another one',
-            'user.email.unique' => 'This email is already associated with a user, try to login with you password',
+            'user.email.unique' => 'This email is already associated with a user',
             'user.phone.integer' => 'Enter numbers only please',
             'user.phone.max' => 'This number is not valid',
-            'user.password.required' => 'The password is required, please fill it in',
             'user.password.min' => 'The password minimun length is 8, please try again',
             'user.password.max' => 'The password maximum length is 20, please try again',
         ];
