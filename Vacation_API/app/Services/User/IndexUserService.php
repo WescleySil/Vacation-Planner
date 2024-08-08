@@ -14,22 +14,20 @@ class IndexUserService
         $this->user = $user;
     }
 
-    public function run($data): Collection{
+    public function run($data){
 
-        $id = $data['filters']['id'] ?? null;
         $name = $data['filters']['name'] ?? null;
         $email = $data['filters']['email'] ?? null;
 
         $query = $this->user
-            ->when($id, function ($query) use ($id){
-               return $query->where('id', $id);
-            })
-            ->when($name, function ($query) use ($name){
-                return $query->where('name', 'in', $name);
+            ->when($name, function($query) use ($name){
+               return $query->where('name','like', '%'.$name.'%');
             })
             ->when($email, function ($query) use ($email){
-               return $query->where('email', $email);
+               return $query->where('email', 'like', '%'.$email.'%');
             });
-        return $query;
+
+
+        return $query->get();
     }
 }

@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
+use App\Services\User\DeleteUserService;
+use App\Services\User\ShowUserService;
 use App\Services\User\StoreUserService;
+use App\Services\User\UpdateUserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
@@ -18,6 +24,7 @@ class UserController extends Controller
      */
     public function index(IndexUserRequest $indexUserRequest, IndexUserService $indexUserService): AnonymousResourceCollection
     {
+
         $data = $indexUserRequest->validated();
         $users = $indexUserService->run($data);
 
@@ -27,8 +34,12 @@ class UserController extends Controller
     /**
      * Show a specified resource
      */
-    public function show(){
+    public function show(Request $request, ShowUserService $showUserService): AnonymousResourceCollection | JsonResponse {
 
+
+        $user = $showUserService->run($request);
+
+        return UserResource::collection($user);
     }
 
     /**
@@ -45,16 +56,24 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $updateUserRequest, UpdateUserService $updateUserService, User $user) : Response | JsonResponse
     {
-        //
+        $data = $updateUserRequest->validated();
+        if(empty($data)){
+            return response()->json("{'message':'No updates were requested'}");
+        }
+        $user = $updateUserService->run($data, $user);
+
+        return response(new UserResource($user));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DeleteUserService $deleteUserService, User $user)
     {
-        //
+        $response = $deleteUserService->run($user);
+
+        return response($response);
     }
 }

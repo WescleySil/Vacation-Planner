@@ -23,7 +23,7 @@ class IndexUserRequest extends FormRequest
     {
         return [
             'filters.name' => ['nullable', 'string'],
-            'filters.email' => ['nullable', 'email']
+            'filters.email' => ['nullable', 'string']
         ];
     }
 }
