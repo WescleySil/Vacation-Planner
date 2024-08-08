@@ -8,6 +8,12 @@ class LogoutService
     {
         $user = auth()->user();
 
-        return "Logout sucessfull";
+        $user->tokens()->delete();
+
+        if(!$user->tokens()){
+
+            return "The user was not looged out, please try again";
+        }
+        return "Logout Sucessfull";
     }
 }
