@@ -26,7 +26,20 @@ docker compose up -d
 ```shell
 cd Vacation_API/
 composer install
-php artisan migrate
+cp .env.example .env
+```
+### Fill this fields in the .env file
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=vacation_plans
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+#### Then run
+```
+php artisan migrate 
 php artisan key:generate
 ```
 

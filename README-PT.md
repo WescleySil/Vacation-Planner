@@ -28,9 +28,23 @@ docker compose up -d
 ```shell
 cd Vacation_API/
 composer install
-php artisan migrate
+cp .env.example .env
+```
+### Preencha os campos abaixo no arquivo .env
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=vacation_plans
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+#### Depois rode
+```
+php artisan migrate 
 php artisan key:generate
 ```
+
 
 3. **Basta acessar as rotas**: Após esse processo, acesse o seu `localhost`, você já pode testar as rotas utilizando programas para testes de APIs, como POSTMAN, INSOMNIA e outros. Abaixo segue a Collection em Json das rotas.
    [**Clique aqui para ver**](./.github/Vacations%20Planner.postman_collection.json)
