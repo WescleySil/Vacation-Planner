@@ -48,7 +48,16 @@ sudo vim /etc/hosts
 >" ~                                 
 >" 12 lines, 0 characters
 
-3. **Just access the routes:** After this process, you can access the routes using API testing tools like POSTMAN, INSOMNIA, and others. Below is the JSON Collection of the routes.
+
+3. **Basic setup commands:** After starting the containers, you need to configure Laravel to ensure everything works perfectly. To do this, access the terminal using the following command: `docker compose exec app bash`. Once the terminal is open, run the commands below:
+```shell
+cd Vacation_API/
+composer install
+php artisan migrate
+php artisan key:generate
+```
+
+4. **Just access the routes:** After this process, you can access the routes using API testing tools like POSTMAN, INSOMNIA, and others. Below is the JSON Collection of the routes.
 [**Click here to see**](./collection.json)
 
 And you’re all set! Just follow these steps and you’ll have the project up and running in no time.

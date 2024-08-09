@@ -8,13 +8,12 @@ use App\Http\Requests\UpdateHolidayPlanRequest;
 use App\Http\Resources\HolidayPlanResource;
 use App\Models\HolidayPlan;
 use App\Services\HolidayPlan\DeleteHolidayPlanService;
+use App\Services\HolidayPlan\GenerateHolidayPlanPdfService;
 use App\Services\HolidayPlan\IndexHolidayPlanService;
 use App\Services\HolidayPlan\ShowHolidayPlanService;
 use App\Services\HolidayPlan\StoreHolidayPlanService;
 use App\Services\HolidayPlan\UpdateHolidayPlanService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 
@@ -33,6 +32,24 @@ class HolidayPlanController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Request $request, ShowHolidayPlanService $showHolidayPlanService): JsonResponse
+    {
+        $plan = $showHolidayPlanService->run($request);
+
+        return response()->json(HolidayPlanResource::collection($plan));
+    }
+
+    public function getDocument(HolidayPlan $plan, GenerateHolidayPlanPdfService $generateHolidayPlanPdfService){
+
+        $response = $generateHolidayPlanPdfService->run($plan);
+
+
+        return $response->download();
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreHolidayPlanRequest $storeHolidayPlanRequest, StoreHolidayPlanService $storeHolidayPlanService): JsonResponse
@@ -41,16 +58,6 @@ class HolidayPlanController extends Controller
         $plan = $storeHolidayPlanService->run($data);
 
         return response()->json(new HolidayPlanResource($plan));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request, ShowHolidayPlanService $showHolidayPlanService): JsonResponse
-    {
-        $plan = $showHolidayPlanService->run($request);
-
-        return response()->json(HolidayPlanResource::collection($plan));
     }
 
     /**

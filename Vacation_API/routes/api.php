@@ -24,10 +24,12 @@ Route::post('/user/', [UserController::class, 'store']);
 Route::prefix('plan')->middleware('auth:sanctum')->name('plan.')->group(function (){
     Route::get('/',[HolidayPlanController::class, 'index']);
     Route::get('/{id}',[HolidayPlanController::class, 'show']);
+    Route::get('/pdf/{plan}',[HolidayPlanController::class, 'getDocument']);
     Route::post('/', [HolidayPlanController::class, 'store']);
     Route::put('/{plan}', [HolidayPlanController::class, 'update']);
     Route::delete('/{plan}',[HolidayPlanController::class, 'destroy']);
 });
+
 
 
 Route::fallback(function () {
