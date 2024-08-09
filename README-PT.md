@@ -24,33 +24,7 @@ cd Vacation-Planner/
 docker compose up -d
 ```
 
-2. **Adicionar ip no hosts:** Execute os comandos abaixo para adicionar indicar o ip local para o dominio necessário.
-```shell
-sudo vim /etc/hosts
-```
->**Exemplo de tela do Vim:** Você irá clicar na tecla " i " do seu teclado e adicionar o seguinte texto ao final do arquivo `127.0.0.1  plan.vacation.com`, após adicionar clique a tecla "Esc" depois clique em  " : " e digite wq, e clique " Enter "
->
->```vim
->" Vim configuration file
->set number          " Show line numbers
->syntax on           " Enable syntax highlighting
->" Press `i` to enter insert mode
->" Press `Esc` to return to normal mode
->127.0.0.1       plan.vacation.com
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->" ~                                 
->" 12 lines, 0 characters
-
-3. **Comandos básicos para configuração:** Apos subir os containers, é preciso configurar o laravel para funcionar tudo perfeitamente. Para isso acesse o terminal usando o seguinte comando `docker compose exec app bash`, após abrir o terminal execute os comandos abaixo:
+2. **Comandos básicos para configuração:** Apos subir os containers, é preciso configurar o laravel para funcionar tudo perfeitamente. Para isso acesse o terminal usando o seguinte comando `docker compose exec app bash`, após abrir o terminal execute os comandos abaixo:
 ```shell
 cd Vacation_API/
 composer install
@@ -58,5 +32,5 @@ php artisan migrate
 php artisan key:generate
 ```
 
-4. **Basta acessar as rotas**: Após esse processo você já pode acessar as rotas utilizando programas para testes de APIs, como POSTMAN, INSOMNIA e outros. Abaixo segue a Collection em Json das rotas.
-   [**Clique aqui para ver**](./collection.json)
+3. **Basta acessar as rotas**: Após esse processo, acesse o seu `localhost`, você já pode testar as rotas utilizando programas para testes de APIs, como POSTMAN, INSOMNIA e outros. Abaixo segue a Collection em Json das rotas.
+   [**Clique aqui para ver**](./.github/Vacations%20Planner.postman_collection.json)

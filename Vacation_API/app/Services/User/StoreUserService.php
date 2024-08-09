@@ -15,7 +15,7 @@ class StoreUserService
 
     public function run(array $data): object
     {
-        $data['user']['password'] = Hash::make('password');
+        $data['user']['password'] = Hash::make($data['user']['password']);
 
         return $this->user->create($data['user']);
 

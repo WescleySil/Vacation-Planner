@@ -22,34 +22,7 @@ cd Vacation-Planner/
 docker compose up -d
 ```
 
-2. **Add IP to hosts:** Run the commands below to map the local IP to the required domain.
-```shell
-sudo vim /etc/hosts
-```
-> **Example of Vim Screen:** You will press the " **i** " key on your keyboard and add the following text to the end of the file: `127.0.0.1  plan.vacation.com`. After adding the text, press " **Esc** ", then press " **:** " and type `wq`, and hit " **Enter** ".
-> 
->```vim
->" Vim configuration file
->set number          " Show line numbers
->syntax on           " Enable syntax highlighting
->" Press `i` to enter insert mode
->" Press `Esc` to return to normal mode
->127.0.0.1       plan.vacation.com
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->~                                  
->" ~                                 
->" 12 lines, 0 characters
-
-
-3. **Basic setup commands:** After starting the containers, you need to configure Laravel to ensure everything works perfectly. To do this, access the terminal using the following command: `docker compose exec app bash`. Once the terminal is open, run the commands below:
+2. **Basic setup commands:** After starting the containers, you need to configure Laravel to ensure everything works perfectly. To do this, access the terminal using the following command: `docker compose exec app bash`. Once the terminal is open, run the commands below:
 ```shell
 cd Vacation_API/
 composer install
@@ -57,8 +30,8 @@ php artisan migrate
 php artisan key:generate
 ```
 
-4. **Just access the routes:** After this process, you can access the routes using API testing tools like POSTMAN, INSOMNIA, and others. Below is the JSON Collection of the routes.
-[**Click here to see**](./collection.json)
+3. **Just access the routes:** After this process, acess `localhost`, you can test the routes using API testing tools like POSTMAN, INSOMNIA, and others. Below is the JSON Collection of the routes.
+[**Click here to see**](.github/Vacations%20Planner.postman_collection.json)
 
 And you’re all set! Just follow these steps and you’ll have the project up and running in no time.
 
