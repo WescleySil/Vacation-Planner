@@ -22,41 +22,41 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexUserRequest $indexUserRequest, IndexUserService $indexUserService): AnonymousResourceCollection
+    public function index(IndexUserRequest $indexUserRequest, IndexUserService $indexUserService): JsonResponse
     {
 
         $data = $indexUserRequest->validated();
         $users = $indexUserService->run($data);
 
-        return UserResource::collection($users);
+        return response()->json(UserResource::collection($users));
     }
 
     /**
      * Show a specified resource
      */
-    public function show(Request $request, ShowUserService $showUserService): AnonymousResourceCollection | JsonResponse {
+    public function show(Request $request, ShowUserService $showUserService): JsonResponse {
 
 
         $user = $showUserService->run($request);
 
-        return UserResource::collection($user);
+        return response()->json(UserResource::collection($user));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $storeUserRequest, StoreUserService $storeUserService) : Response
+    public function store(StoreUserRequest $storeUserRequest, StoreUserService $storeUserService) : JsonResponse
     {
         $data = $storeUserRequest->validated();
         $user = $storeUserService->run($data);
 
-        return response(new UserResource($user));
+        return response()->json(new UserResource($user));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $updateUserRequest, UpdateUserService $updateUserService, User $user) : Response | JsonResponse
+    public function update(UpdateUserRequest $updateUserRequest, UpdateUserService $updateUserService, User $user) : JsonResponse
     {
         $data = $updateUserRequest->validated();
         if(empty($data)){
@@ -64,16 +64,16 @@ class UserController extends Controller
         }
         $user = $updateUserService->run($data, $user);
 
-        return response(new UserResource($user));
+        return response()->json(new UserResource($user));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeleteUserService $deleteUserService, User $user)
+    public function destroy(DeleteUserService $deleteUserService, User $user): JsonResponse
     {
         $response = $deleteUserService->run($user);
 
-        return response($response);
+        return response()->json($response);
     }
 }
